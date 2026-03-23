@@ -161,40 +161,12 @@ for i in range(len(human_inits)):
         radius=OBS_RADIUS,
     )
 
-# 3 животных (красные)
-'''animals_inits = [(28.0, 2.0)]
-animals_g1   = [(2.0,  28.0)]
-animals_g2   = [(1.0, 1.0)]
-for i in range(len(animals_inits)):
-    add_agent(
-        name=f"Животное {i+1}",
-        init_pos=animals_inits[i],
-        goal_a=animals_g1[i],
-        goal_b=animals_g2[i],
-        vmax=ANIMAL_MAX_SPEED,
-        color="red",
-        radius=OBS_RADIUS,
-    )
-
-# Велосипедист (жёлтый, vmax x2)
-add_agent(
-    name="Велосипедист",
-    init_pos=(28.0, 14.0),
-    goal_a=(4.0, 28.0),
-    goal_b=(28.0, 2.0),
-    vmax=CYCLIST_MAX_SPEED,
-    color="yellow",
-    radius=OBS_RADIUS,
-)'''
-
-# =========================
 # Визуализация
-# =========================
 fig, ax = plt.subplots()
 ax.set_aspect("equal", adjustable="box")
 ax.set_xlim(WORLD_X)
 ax.set_ylim(WORLD_Y)
-ax.set_title("ORCA (rvo2): чистая симуляция (без FIS)")
+ax.set_title("ORCA (rvo2)")
 
 # легенду уводим вправо
 fig.subplots_adjust(right=0.78)
@@ -205,10 +177,6 @@ ax.plot(
     [WORLD_Y[0], WORLD_Y[0], WORLD_Y[1], WORLD_Y[1], WORLD_Y[0]],
     linewidth=1.5
 )
-
-# статичные прямоугольники
-for (x, y, w, h) in static_rects:
-    ax.add_patch(Rectangle((x, y), w, h, facecolor="black", edgecolor="black", alpha=0.9))
 
 # контрольные точки
 wp_x = [p[0] for p in waypoints]
@@ -245,10 +213,10 @@ for meta in agents_meta:
         c.set_facecolor(meta["color"])
         c.set_edgecolor(meta["color"])
     ax.add_patch(c)
-    c.set_label(meta["name"])
+    #c.set_label(meta["name"])
     agent_circles.append(c)
 
-    gp, = ax.plot([meta["goal"][0]], [meta["goal"][1]], marker="x", markersize=7, linewidth=0)
+    gp, = ax.plot([meta["goal"][0]], [meta["goal"][1]], marker="x", markersize=4, linewidth=0)
     agent_goal_plots.append(gp)
 
 # векторы скорости (опционально)
